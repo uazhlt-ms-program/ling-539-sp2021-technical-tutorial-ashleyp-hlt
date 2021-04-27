@@ -7,7 +7,7 @@ Snorkel is a python package for building and managing training datasets, *progra
 ## Task: Information Detection
 The goal behind building this training set is to label the google reviews as either ```STUFF``` or ```FLUFF``` to indicate whether the review provides useful information or not.
 * ```STUFF```: contains information on topics that may be relevant to a future traveler, such as parking, scenic tours, facilities, food, etc.
-  * ![Image of STUFF1] (/Desktop/STUFF1.png)
+  * ![Image of STUFF1] (STUFF1.png)
 
 * ```FLUFF```: contains opinions and/or descriptions that do not provide any useful information.  
 
