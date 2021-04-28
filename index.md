@@ -54,4 +54,5 @@ ABSTAIN = -1
 ```
 Snorkel supports numerous different types of LFs; such as keyword searches, pattern matching, third-party models, distant supervision, and crowdworker labels. It is up to the user to decide which types of LFs would be beneficial, and how many should be created. In order to generate ideas for LFs, it is recommended to look at random data points from the training set and identify any class indicators.
 
-Looking at the three reviews used as examples of ```STUFF```,  
+Looking at the three reviews used as examples of ```STUFF```, we see that in the first one "Be careful" is followed by a warning about weather conditions. In the next review, "we suggest" is followed by a recommendation about bringing water and avoiding heat exhaustion. It also mentions an app that acts as a tour guide. The third review preludes information about getting into the park with "warning..." and also mentions the price of helicopter rides. From these reviews alone several keyword search LFs can be generated as well as a pattern match LF to catch reviews that contain "$". 
+
