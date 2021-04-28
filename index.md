@@ -17,7 +17,7 @@ The goal behind building this training set is to label the google reviews as eit
   * ![Image of FLUFF3] (/ScreenShots/FLUFF3.png)
 
 ## Step 1: Loading Data
-As previously mentioned, the data for this tutorial was scraped from google reviews on the web and exported as an xml file. ElementTree was used to parse the file and extract each review and it's published-at date. Out of the 300 reviews collected, the first 200 were added to a dictionary designated as the training set, and the remaining 100 made up the test set. Snorkel works well with various types of DataFrames and provides native support for several sturctures, so the dictonaries were then converted to Pandas DataFrames.
+As previously mentioned, the data for this tutorial was scraped from google reviews on the web and exported as an xml file. ElementTree was used to parse the file and extract each review and it's published-at date. Out of the 300 reviews collected, the first 200 were added to a dictionary designated as the training set, and the remaining 100 made up the test set. Snorkel works well with various types of DataFrames and provides native support for several sturctures, so the dictionaries were then converted to Pandas DataFrames.
 
 ```python 
 import xml.etree.ElementTree as ET
@@ -44,4 +44,11 @@ for key in reviews[200:]:
 
 dfr_train = pd.Series(dtrain).to_frame()
 dfr_test = pd.Series(dtest).to_frame() 
+```
+## Step 2: Writing Labeling Functions (LFs)
+In the task at hand, the goal is to label reviews as either ```STUFF``` or ```FLUFF```. A third label ```ABSTAIN``` exists for when a data point cannot be labeled.
+```python
+STUFF = 1
+FLUFF = 0
+ABSTAIN = -1
 ```
