@@ -99,6 +99,7 @@ def pricing(x):
 def length(x):
     return FLUFF if len(str(x)) < 60 else ABSTAIN
 ```
+## Step 3: Applying Label Functions
 The Snorkel Labeling Package provides several LF appliers that can be imported and used to apply the created LFs to the data points. Since the data points for this tutorial are formatted in a Pandas DataFrame, we will be using the PandasLFApplier. The parameter for this applier is a list of LFs.
 ```python
 lfs = [recommend, warning, parking, tour, shuttle, bathroom, food, pricing, length]
