@@ -7,14 +7,14 @@ Snorkel is a python package for building and managing training datasets, *progra
 ## Task: Information Detection
 The goal behind building this training set is to label the google reviews as either ```STUFF``` or ```FLUFF``` to indicate whether the review provides useful information or not.
 * ```STUFF```: contains information on topics that may be relevant to a future visitor, such as parking, scenic tours, facilities, food, etc.
-  * ![Image of STUFF1] https://github.com/uazhlt-ms-program/technical-tutorial-ashleyp-hlt/blob/main/ScreenShots/STUFF1.png)
-  * ![Image of STUFF2] (/ScreenShots/STUFF2.png)
-  * ![Image of STUFF3] (/ScreenShots/STUFF3.png)
+  * ![Image of STUFF1](/ScreenShots/STUFF1.png)
+  * ![Image of STUFF2](/ScreenShots/STUFF2.png)
+  * ![Image of STUFF3](/ScreenShots/STUFF3.png)
 
 * ```FLUFF```: contains opinions and/or descriptions that do not provide any useful information.  
-  * ![Image of FLUFF1] (/ScreenShots/FLUFF1.png)
-  * ![Image of FLUFF2] (/ScreenShots/FLUFF2.png)
-  * ![Image of FLUFF3] (/ScreenShots/FLUFF3.png)
+  * ![Image of FLUFF1](/ScreenShots/FLUFF1.png)
+  * ![Image of FLUFF2](/ScreenShots/FLUFF2.png)
+  * ![Image of FLUFF3](/ScreenShots/FLUFF3.png)
 
 ## Step 1: Loading Data
 As previously mentioned, the data for this tutorial was scraped from google reviews on the web and exported as an xml file. ElementTree was used to parse the file and extract each review and it's published-at date. Out of the 300 reviews collected, the first 200 were added to a dictionary designated as the training set, and the remaining 100 made up the test set. Snorkel works well with various types of DataFrames and provides native support for several structures, so the dictionaries were then converted to Pandas DataFrames.
@@ -52,4 +52,6 @@ STUFF = 1
 FLUFF = 0
 ABSTAIN = -1
 ```
-Snorkel supports numerous different types of LFs; such as keyword searches, pattern matching, third-party models, distant supervision, and crowdworker labels. It is up to the user to decide which types of LFs would be beneficial, and how many should be created. In order to generate ideas for LFs, it is recommended to look at random data points from the training set and identify any class indicators. 
+Snorkel supports numerous different types of LFs; such as keyword searches, pattern matching, third-party models, distant supervision, and crowdworker labels. It is up to the user to decide which types of LFs would be beneficial, and how many should be created. In order to generate ideas for LFs, it is recommended to look at random data points from the training set and identify any class indicators.
+
+Looking at the three reviews used as examples of ```STUFF``` 
