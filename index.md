@@ -17,4 +17,31 @@ The goal behind building this training set is to label the google reviews as eit
   * ![Image of FLUFF3] (/ScreenShots/FLUFF3.png)
 
 ## Step 1: Loading Data
-As previously mentioned, the data for this tutorial was scraped from google reviews on the web and exported as an xml file. ElementTree was used to parse the file and extract each review and it's published-at date. Out of the 300 reviews collected, the first 200 were added to a dictionary designated as the training set, and the remaining 100 made up the test set. Snorkel works well with DataFrames and provides native support for several sturctures, so the dictonaries were  then converted to Pandas DataFrames.
+As previously mentioned, the data for this tutorial was scraped from google reviews on the web and exported as an xml file. ElementTree was used to parse the file and extract each review and it's published-at date. Out of the 300 reviews collected, the first 200 were added to a dictionary designated as the training set, and the remaining 100 made up the test set. Snorkel works well with various types of DataFrames and provides native support for several sturctures, so the dictonaries were then converted to Pandas DataFrames.
+
+```python 
+import xml.etree.ElementTree as ET
+import pandas as pd
+
+rev_data = open('data.xml', 'r').read()
+root = ET.XML(rev_data)
+
+reviews = []
+dates = []
+for text in root.iter('text'):
+    reviews.append(text.text)   
+for date in root.iter('publishedAtDate'):
+    dates.append(date.text)
+
+dtrain = {}
+for key in reviews[:200]:
+    for value in dates[:200]:
+        dtrain[key] = value     
+dtest = {}
+for key in reviews[200:]:
+    for value in dates[200:]:
+        dtest[key] = value  
+
+dfr_train = pd.Series(dtrain).to_frame()
+dfr_test = pd.Series(dtest).to_frame() 
+```
