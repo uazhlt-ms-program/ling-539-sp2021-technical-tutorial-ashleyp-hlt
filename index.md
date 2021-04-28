@@ -52,7 +52,57 @@ STUFF = 1
 FLUFF = 0
 ABSTAIN = -1
 ```
-Snorkel supports numerous different types of LFs; such as keyword searches, pattern matching, third-party models, distant supervision, and crowdworker labels. It is up to the user to decide which types of LFs would be beneficial, and how many should be created. In order to generate ideas for LFs, it is recommended to look at random data points from the training set and identify any class indicators.
+Snorkel supports numerous different types of LFs such as keyword searches, pattern matching, third-party models, distant supervision, and crowdworker labels. It is up to the user to decide which types of LFs would be beneficial, and how many should be created. In order to generate ideas for LFs, it is recommended to look at random data points from the training set and identify any class indicators.
 
-Looking at the three reviews used as examples of ```STUFF```, we see that in the first one "Be careful" is followed by a warning about weather conditions. In the next review, "we suggest" is followed by a recommendation about bringing water and avoiding heat exhaustion. It also mentions an app that acts as a tour guide. The third review preludes information about getting into the park with "warning..." and also mentions the price of helicopter rides. From these reviews alone several keyword search LFs can be generated as well as a pattern match LF to catch reviews that contain "$". 
+Looking at the three reviews used as examples of ```STUFF```, we see that in the first one "Be careful" is followed by a warning about weather conditions. In the next review, "we suggest" is followed by a recommendation about bringing water and avoiding heat exhaustion. It also mentions an app that acts as a tour guide. The third review preludes information about getting into the park with "warning..." and also mentions the price of helicopter rides. From these reviews alone several keyword search LFs can be generated as well as a pattern match LF to find reviews that contain "$". The reviews above that were selected as examples of ```FLUFF``` show that this class is lacking when it comes to indicators. This was to be expected for our task because it is difficult to detect the absence of *something* when that something is not explicitly defined. However, these reviews do appear to be shorter than those that provide information, so a heuristic LF could be created based on the length of a review.
 
+To actually write a LF, simply place the decorator ```@labeling_function()``` above a python function that returns a label.
+```python
+from snorkel.labeling import labeling_function
+from snorkel.labeling import PandasLFApplier
+from snorkel.labeling import LFAnalysis
+import re
+
+@labeling_function()
+def recommend(x):
+    return STUFF if re.search("recommend|advice|advise|suggest|bring",str(x)) else ABSTAIN
+
+@labeling_function()
+def warning(x):
+    return STUFF if re.search("warning|watch out|be sure to|plan for|be careful|avoid", str(x)) else ABSTAIN
+
+@labeling_function()
+def parking(x):
+    return STUFF if re.search("parking",str(x)) else ABSTAIN
+
+@labeling_function()
+def tour(x):
+    return STUFF if re.search("tour|helicopter|plane",str(x)) else ABSTAIN
+
+@labeling_function()
+def shuttle(x):
+    return STUFF if re.search("shuttle[s]?|bus|bus stops",str(x)) else ABSTAIN
+
+@labeling_function()
+def bathroom(x):
+    return STUFF if re.search("bathroom[s]?|facilites",str(x)) else ABSTAIN
+
+@labeling_function()
+def food(x):
+    return STUFF if re.search("food|cafe|restaurant",str(x)) else ABSTAIN
+
+@labeling_function()
+def pricing(x):
+    return STUFF if re.search("\$",str(x)) else ABSTAIN
+
+@labeling_function()
+def length(x):
+    return FLUFF if len(str(x)) < 60 else ABSTAIN
+```
+The Snorkel Labeling Package provides several LF appliers that can be imported and used to apply the created LFs to the data points. Since the data points for this tutorial are formatted in a Pandas DataFrame, we will be using the PandasLFApplier. The parameter for this applier is a list of LFs.
+```python
+lfs = [recommend, warning, parking, tour, shuttle, bathroom, food, pricing, length]
+applier = PandasLFApplier(lfs=lfs)
+L_train = applier.apply(dfr_train)
+L_test = applier.apply(dfr_test)
+```
