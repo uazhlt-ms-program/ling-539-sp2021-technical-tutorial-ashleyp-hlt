@@ -17,4 +17,4 @@ The goal behind building this training set is to label the google reviews as eit
   * ![Image of FLUFF3] (/ScreenShots/FLUFF3.png)
 
 ## Step 1: Loading Data
-As previously mentioned, the data for this tutorial was scraped from google reviews on the web and exported as an xml file. The xml file was parsed using ElementTree to extract the data relevant to our task; Snorkel works well with DataFrames so the 
+As previously mentioned, the data for this tutorial was scraped from google reviews on the web and exported as an xml file. ElementTree was used to parse the file and extract each review and it's published-at date. Out of the 300 reviews collected, the first 200 were added to a dictionary designated as the training set, and the remaining 100 made up the test set. Snorkel works well with DataFrames and provides native support for several sturctures, so the dictonaries were  then converted to Pandas DataFrames.
