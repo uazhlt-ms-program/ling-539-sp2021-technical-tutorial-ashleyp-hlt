@@ -99,7 +99,7 @@ def length(x):
     return FLUFF if len(str(x)) < 60 else ABSTAIN
 ```
 ## Step 3: Applying Label Functions
-The Snorkel Labeling Package provides several LF appliers that can be imported to apply the developed LFs to the data points. For larger datasets, larger LF sets, and LFs that require more computation, it is recommended to use the Dask DataFrames or PySpark DataFrames with their respective appliers. Since the data points for this tutorial are formatted in a Pandas DataFrame, we will be using the PandasLFApplier. The parameter for this applier is a list of LFs and the ```.apply()``` method results in a label matrix. There is one row for each data point and the columns represent each LF.
+The Snorkel Labeling Package provides several LF appliers that can be imported to apply the developed LFs to the data points. For larger datasets, larger LF sets, and LFs that require more computation, it is recommended to use the Dask DataFrames or PySpark DataFrames with their respective appliers. Since the data points for this tutorial are formatted in a Pandas DataFrame, we will be using the PandasLFApplier. The parameter for this applier is a list of LFs and the ```.apply()``` method results in a label matrix. Each row represents a data point and each column corresponds to a LF.
 ```python
 from snorkel.labeling import PandasLFApplier
 lfs = [recommend, warning, parking, tour, shuttle, bathroom, food, pricing, length]
@@ -114,5 +114,9 @@ print(L_train)
  [-1 -1 -1 ... -1 -1 -1]
  [-1 -1 -1 ... -1 -1 -1]]
 ```
-## Step 4: Label Analysis
-
+## Step 4: LF Analysis
+The initial LFs that are created are known to be noisy and imperfect. Some datapoints may have multiple labels, some may have none, and some may have conflicting labels. Anaylsis can be done using Snorkel's ```LFAnalysis```, provided in the labeling package. This tool has a variety of methods including ```lf_conflicts()```, ```lf_coverages()```, ```lf_overlaps()```, and ```lf_polarities()```. The ```lf_summary()``` method combines these outputs into an easy to read table.
+```python
+from snorkel.labeling import LFAnalysis
+LFAnalysis(L=L_train, lfs=lfs,).lf_summary()
+```
