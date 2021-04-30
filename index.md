@@ -59,7 +59,6 @@ Looking at the three reviews used as examples of ```STUFF```, we see that in the
 To actually write a LF, simply place the decorator ```@labeling_function()``` above a python function that returns a label.
 ```python
 from snorkel.labeling import labeling_function
-from snorkel.labeling import PandasLFApplier
 from snorkel.labeling import LFAnalysis
 import re
 
@@ -100,10 +99,20 @@ def length(x):
     return FLUFF if len(str(x)) < 60 else ABSTAIN
 ```
 ## Step 3: Applying Label Functions
-The Snorkel Labeling Package provides several LF appliers that can be imported and to apply the created LFs to the data points. Since the data points for this tutorial are formatted in a Pandas DataFrame, we will be using the PandasLFApplier. The parameter for this applier is a list of LFs.
+The Snorkel Labeling Package provides several LF appliers that can be imported to apply the developed LFs to the data points. For larger datasets, larger LF sets, and LFs that require more computation, it is recommended to use the Dask DataFrames or PySpark DataFrames with their respective appliers. Since the data points for this tutorial are formatted in a Pandas DataFrame, we will be using the PandasLFApplier. The parameter for this applier is a list of LFs and the ```.apply()``` method results in a label matrix. There is one row for each data point and the columns represent each LF.
 ```python
+from snorkel.labeling import PandasLFApplier
 lfs = [recommend, warning, parking, tour, shuttle, bathroom, food, pricing, length]
 applier = PandasLFApplier(lfs=lfs)
 L_train = applier.apply(dfr_train)
-L_test = applier.apply(dfr_test)
+print(L_train)
+[[ 1 -1 -1 ...  1 -1 -1]
+ [ 1 -1 -1 ... -1 -1 -1]
+ [ 1 -1 -1 ... -1 -1 -1]
+ ...
+ [-1 -1 -1 ... -1 -1 -1]
+ [-1 -1 -1 ... -1 -1 -1]
+ [-1 -1 -1 ... -1 -1 -1]]
 ```
+## Step 4: Label Analysis
+
