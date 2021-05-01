@@ -118,7 +118,7 @@ LFAnalysis(L=L_train, lfs=lfs,).lf_summary()
 ![LFSummary](https://github.com/uazhlt-ms-program/technical-tutorial-ashleyp-hlt/blob/main/ScreenShots/LFsummary.png)
 
 Looking at the table we can see that the ```length``` LF did not label any data points and therefore should be revised or deleted.
-To see the total percentage of data points that were labeled we can use ```LFAnalysis(L=L_train).label_coverage()```. The output of that line is 0.354, indicating that 35.4% of data points were labeled on the initial run. The goal is not to label every data point, but to create a solid set of labels that can be used to train a classifier.
+To see the total percentage of data points that were labeled we can use ```LFAnalysis(L=L_train).label_coverage()```. The output of that line is 0.339, indicating that 33.9% of data points were labeled on the initial run. The goal is not to label every data point, but to create a solid set of labels that can be used to train a classifier.
 
-To check for false positives we can use
-
+To check for false positives we can take a look at some random data points from our training set.
+```dfr_train.iloc[L_train[:,1] == STUFF].sample(5, random_state=1)``` 
