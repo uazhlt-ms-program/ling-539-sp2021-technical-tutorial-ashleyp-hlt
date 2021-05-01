@@ -115,7 +115,8 @@ The initial LFs that are created are known to be noisy and imperfect. Some data 
 from snorkel.labeling import LFAnalysis
 LFAnalysis(L=L_train, lfs=lfs,).lf_summary()
 ```
-![LFAnalysisSummary](https://github.com/uazhlt-ms-program/technical-tutorial-ashleyp-hlt/blob/main/ScreenShots/summary.png)
+![LFSummary](https://github.com/uazhlt-ms-program/technical-tutorial-ashleyp-hlt/blob/main/ScreenShots/LFsummary.png)
+
 Looking at the table we can see that the ```length``` LF did not label any data points and therefore should be revised or deleted.
 To see the total percentage of data points that were labeled we can use ```LFAnalysis(L=L_train).label_coverage()```. The output of that line is 0.354, indicating that 35.4% of data points were labeled on the initial run. The goal is not to label every data point, but to create a solid set of labels that can be used to train a classifier.
 
