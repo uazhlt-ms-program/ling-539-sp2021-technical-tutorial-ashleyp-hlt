@@ -34,16 +34,11 @@ for date in root.iter('publishedAtDate'):
     dates.append(date.text)
 
 dtrain = {}
-for key in reviews[:200]:
-    for value in dates[:200]:
+for key in reviews:
+    for value in dates:
         dtrain[key] = value     
-dtest = {}
-for key in reviews[200:]:
-    for value in dates[200:]:
-        dtest[key] = value  
 
 dfr_train = pd.Series(dtrain).to_frame()
-dfr_test = pd.Series(dtest).to_frame() 
 ```
 ## Step 2: Writing Labeling Functions (LFs)
 In the task at hand, the goal is to label reviews as either ```STUFF``` or ```FLUFF```. A third label ```ABSTAIN``` exists for when a data point cannot be labeled.
@@ -115,9 +110,14 @@ print(L_train)
  [-1 -1 -1 ... -1 -1 -1]]
 ```
 ## Step 4: LF Analysis
-The initial LFs that are created are known to be noisy and imperfect. Some data points may have multiple labels, some may have none, and some may have conflicting labels. Analysis can be done using Snorkel's ```LFAnalysis```, provided in the labeling package. This tool has a variety of methods including ```lf_conflicts()```, ```lf_coverages()```, ```lf_overlaps()```, and ```lf_polarities()```. The ```lf_summary()``` method combines these outputs into an easy to read table.
+The initial LFs that are created are known to be noisy and imperfect. Some data points may have multiple labels, some may have none, and some may have conflicting labels. Analysis of the LFs can be done using Snorkel's ```LFAnalysis```, provided in the labeling package. This tool has a variety of methods including ```lf_conflicts()```, ```lf_coverages()```, ```lf_overlaps()```, and ```lf_polarities()```. The ```lf_summary()``` method combines these outputs into an easy to read table. Polarity is the label assigned by the LF, and coverage is the percentage of data points labeled by the LF.
 ```python
 from snorkel.labeling import LFAnalysis
 LFAnalysis(L=L_train, lfs=lfs,).lf_summary()
 ```
 ![LFAnalysisSummary](https://github.com/uazhlt-ms-program/technical-tutorial-ashleyp-hlt/blob/main/ScreenShots/summary.png)
+Looking at the table we can see that the ```length``` LF did not label any data points and therefore should be revised or deleted.
+To see the total percentage of data points that were labeled we can use ```LFAnalysis(L=L_train).label_coverage()```. The output of that line is 0.354, indicating that 35.4% of data points were labeled on the initial run. The goal is not to label every data point, but to create a solid set of labels that can be used to train a classifier.
+
+To check for false positives we can use
+
