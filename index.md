@@ -122,3 +122,4 @@ To see the total percentage of data points that were labeled we can use ```LFAna
 
 To check for false positives we can take a look at some random data points from our training set.
 ```dfr_train.iloc[L_train[:,1] == STUFF].sample(5, random_state=1)``` 
+![sample](https://github.com/uazhlt-ms-program/technical-tutorial-ashleyp-hlt/blob/main/ScreenShots/sample.png)
