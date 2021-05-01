@@ -120,4 +120,4 @@ The initial LFs that are created are known to be noisy and imperfect. Some data 
 from snorkel.labeling import LFAnalysis
 LFAnalysis(L=L_train, lfs=lfs,).lf_summary()
 ```
-![LFAnalysisSummary](https://github.com/uazhlt-ms-program/technical-tutorial-ashleyp-hlt/blob/main/ScreenShots/LFSummary.png)
+![LFAnalysisSummary](https://github.com/uazhlt-ms-program/technical-tutorial-ashleyp-hlt/blob/main/ScreenShots/summary.png)
