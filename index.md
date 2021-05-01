@@ -125,6 +125,7 @@ To check for false positives we can take a look at some random data points from 
 
 ![sample](https://github.com/uazhlt-ms-program/technical-tutorial-ashleyp-hlt/blob/main/ScreenShots/sample.png)
 These all appear to be correctly labeled according to our definition of "STUFF".
+![sample2](https://github.com/uazhlt-ms-program/technical-tutorial-ashleyp-hlt/blob/main/ScreenShots/sample.zip)
 
 The next step is to combine and clean up our LFs in order to decrease noise and increase accuracy. Snorkel provides the ```LabelModel``` precisely for this purpose. The ```LabelModel``` automatically estimates the accuracies and correlations of the LFs in order to reweight and combine their labels into a cleaner, final set.
 ```python
