@@ -122,4 +122,17 @@ To see the total percentage of data points that were labeled we can use ```LFAna
 
 To check for false positives we can take a look at some random data points from our training set.
 ```dfr_train.iloc[L_train[:,1] == STUFF].sample(5, random_state=1)``` 
+
 ![sample](https://github.com/uazhlt-ms-program/technical-tutorial-ashleyp-hlt/blob/main/ScreenShots/sample.png)
+These all appear to be correctly labeled according to our definition of "STUFF".
+
+The next step is to combine and clean up our LFs in order to decrease noise and increase accuracy. Snorkel provides the ```LabelModel``` precisly for this purpose. The ```LabelModel``` automatically estimates the accuracies and correlations of the LFs in order to reweight and combine their labels into a cleaner set.
+```python
+from snorkel.labeling.model import LabelModel
+
+label_model = LabelModel(cardinality=2, verbose=True)
+label_model.fit(L_train, n_epochs=500, log_freq=100, seed=123)
+dfr_train["label"] = label_model.predict(L_train)
+dfr_train = dfr_train[dfr_train.label != ABSTAIN]
+```
+The last line in the code above simply removes the data points that were not labeled. 
