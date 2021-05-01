@@ -84,7 +84,7 @@ def shuttle(x):
 
 @labeling_function()
 def bathroom(x):
-    return STUFF if re.search("bathroom[s]?|facilites",str(x)) else ABSTAIN
+    return STUFF if re.search("bathroom[s]?|facilities",str(x)) else ABSTAIN
 
 @labeling_function()
 def food(x):
@@ -115,7 +115,7 @@ print(L_train)
  [-1 -1 -1 ... -1 -1 -1]]
 ```
 ## Step 4: LF Analysis
-The initial LFs that are created are known to be noisy and imperfect. Some datapoints may have multiple labels, some may have none, and some may have conflicting labels. Anaylsis can be done using Snorkel's ```LFAnalysis```, provided in the labeling package. This tool has a variety of methods including ```lf_conflicts()```, ```lf_coverages()```, ```lf_overlaps()```, and ```lf_polarities()```. The ```lf_summary()``` method combines these outputs into an easy to read table.
+The initial LFs that are created are known to be noisy and imperfect. Some data points may have multiple labels, some may have none, and some may have conflicting labels. Analysis can be done using Snorkel's ```LFAnalysis```, provided in the labeling package. This tool has a variety of methods including ```lf_conflicts()```, ```lf_coverages()```, ```lf_overlaps()```, and ```lf_polarities()```. The ```lf_summary()``` method combines these outputs into an easy to read table.
 ```python
 from snorkel.labeling import LFAnalysis
 LFAnalysis(L=L_train, lfs=lfs,).lf_summary()
