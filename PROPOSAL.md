@@ -1,27 +1,27 @@
 ### Tool name
 
-_Name of tool here_
+Snorkel
 
 ### URL (tutorial)
 
-_provide the URL for your webpage.  This should be "live" (i.e., publicly accessible), though the page doesn't need to have any content related to the tutorial prior to your proposal being accepted._
+https://uazhlt-ms-program.github.io/technical-tutorial-ashleyp-hlt/
 
 ### URL (tool)
 
-_URL of tool here_
+https://www.snorkel.org
 
 ### License
 
-_License name and link if available_
+Apache License 2.0 http://www.apache.org/licenses/
 
 ### Usage
 
-_Describe the problems the tool aims to solve_
+Developing and managing training data is usually done by hand and is very time consuming. Snorkel was designed to programmatically label, build, and manage training data.
 
 ### Natural languages supported
 
-_List or describe the kinds of natural languages supported by the tool_
+English
 
 ### Proposal
 
-_Describe the form your tutorial will take (nature of data, domain, etc.)_
+My tutorial will be a walkthrough of the Snorkel library. 
