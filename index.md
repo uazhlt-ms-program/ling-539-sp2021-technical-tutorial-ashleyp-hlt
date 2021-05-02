@@ -135,4 +135,4 @@ label_model.fit(L_train, n_epochs=500, log_freq=100, seed=123)
 dfr_train["label"] = label_model.predict(L_train)
 dfr_train = dfr_train[dfr_train.label != ABSTAIN]
 ```
-The last line in the code above simply removes the data points that were not labeled. 
+The last line in the code above simply removes the data points that were not labeled, as they are not useful for training a classifier. We have now created a functional training set with out any hand labeling!
